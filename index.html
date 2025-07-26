@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LumiDesk Sync - AI-Powered Collaborative Workspace</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" type="image/png" href="assets/lumidesk-logo.png">
+    <link rel="shortcut icon" type="image/png" href="assets/lumidesk-logo.png">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'ghibli-green': '#7FB069',
+                        'ghibli-blue': '#6B9BD2',
+                        'ghibli-cream': '#FFF8E7',
+                        'ghibli-brown': '#8B4513',
+                        'ghibli-sage': '#9CAF88',
+                        'ghibli-sky': '#87CEEB',
+                        'ghibli-forest': '#228B22',
+                        'ghibli-sunset': '#FFB347'
+                    },
+                    fontFamily: {
+                        'ghibli': ['Georgia', 'serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .ghibli-shadow { box-shadow: 0 8px 32px rgba(123, 176, 105, 0.2); }
+        .ghibli-card { background: linear-gradient(135deg, #FFF8E7 0%, #F0F8E8 100%); }
+        .floating { animation: float 6s ease-in-out infinite; }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-ghibli-cream via-green-50 to-ghibli-sky/20 min-h-screen font-ghibli">
+    <!-- Header -->
+    <header class="bg-white/80 backdrop-blur-sm border-b border-ghibli-green/20 sticky top-0 z-50">
+        <nav class="container mx-auto px-4 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-4">
+                    <div class="relative">
+                        <img src="assets/lumidesk-logo.png" alt="LumiDesk Sync Logo" class="w-12 h-12 sm:w-14 sm:h-14 rounded-full ghibli-shadow border-2 border-ghibli-green/30 hover:border-ghibli-green transition-all duration-300 hover:scale-105">
+                        <div class="absolute -top-1 -right-1 w-4 h-4 bg-gradient-to-br from-ghibli-green to-ghibli-forest rounded-full animate-pulse"></div>
+                    </div>
+                    <h1 class="text-xl sm:text-2xl font-bold text-ghibli-forest">LumiDesk Sync</h1>
+                </div>
+                
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="settings.html" class="text-ghibli-forest hover:text-ghibli-green transition-colors flex items-center space-x-2">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                        </svg>
+                        <span>Settings</span>
+                    </a>
+                    <a href="#features" class="text-ghibli-forest hover:text-ghibli-green transition-colors">Features</a>
+                    <a href="#how-it-works" class="text-ghibli-forest hover:text-ghibli-green transition-colors">How It Works</a>
+                    <a href="dashboard.html" class="bg-ghibli-green text-white px-6 py-2 rounded-full hover:bg-ghibli-forest transition-colors ghibli-shadow">
+                        Get Started
+                    </a>
+                </div>
+                
+                <button id="mobile-menu-btn" class="md:hidden p-2 rounded-lg bg-ghibli-green/10">
+                    <div class="w-6 h-6 flex flex-col justify-center space-y-1">
+                        <div class="w-full h-0.5 bg-ghibli-forest rounded transition-all duration-300" id="line1"></div>
+                        <div class="w-full h-0.5 bg-ghibli-forest rounded transition-all duration-300" id="line2"></div>
+                        <div class="w-full h-0.5 bg-ghibli-forest rounded transition-all duration-300" id="line3"></div>
+                    </div>
+                </button>
+            </div>
+            
+            <!-- Mobile Menu -->
+            <div id="mobile-menu" class="md:hidden hidden mt-4 pb-4 border-t border-ghibli-green/20">
+                <div class="flex flex-col space-y-4 pt-4">
+                    <a href="#features" class="text-ghibli-forest hover:text-ghibli-green transition-colors">Features</a>
+                    <a href="#how-it-works" class="text-ghibli-forest hover:text-ghibli-green transition-colors">How It Works</a>
+                    <a href="dashboard.html" class="bg-ghibli-green text-white px-6 py-2 rounded-full hover:bg-ghibli-forest transition-colors text-center">
+                        Get Started
+                    </a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="container mx-auto px-4 py-8 sm:py-16 text-center">
+        <div class="max-w-4xl mx-auto">
+            <div class="floating mb-6 sm:mb-8">
+                <div class="w-24 h-24 sm:w-32 sm:h-32 mx-auto bg-gradient-to-br from-ghibli-green via-ghibli-sage to-ghibli-blue rounded-full flex items-center justify-center ghibli-shadow">
+                    <svg class="w-12 h-12 sm:w-16 sm:h-16 text-white" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 2L2 7v10c0 5.55 3.84 9.74 9 11 5.16-1.26 9-5.45 9-11V7l-10-5z"/>
+                        <path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="2" fill="none"/>
+                    </svg>
+                </div>
+            </div>
+            
+            <h1 class="text-3xl sm:text-5xl md:text-7xl font-bold text-ghibli-forest mb-4 sm:mb-6 leading-tight">
+                Your Team's
+                <span class="text-ghibli-green">Magical</span>
+                Workspace
+            </h1>
+            
+            <p class="text-lg sm:text-xl md:text-2xl text-ghibli-forest/80 mb-6 sm:mb-8 leading-relaxed px-4">
+                An AI-powered collaborative desktop dashboard that syncs your team's tasks, 
+                schedules, and insights in real-time—perfect for hybrid teams.
+            </p>
+            
+            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center px-4">
+                <a href="dashboard.html" class="w-full sm:w-auto bg-ghibli-green text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-ghibli-forest transition-colors ghibli-shadow">
+                    Start Your Journey
+                </a>
+                <button class="w-full sm:w-auto text-ghibli-forest border-2 border-ghibli-green px-8 py-4 rounded-full text-lg font-semibold hover:bg-ghibli-green hover:text-white transition-colors">
+                    Watch Demo
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-12 sm:py-20 bg-white/50">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-center text-ghibli-forest mb-8 sm:mb-16">
+                Enchanted Features
+            </h2>
+            
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 max-w-6xl mx-auto">
+                <!-- AI Smart Workspace -->
+                <div class="ghibli-card rounded-3xl p-6 sm:p-8 ghibli-shadow hover:scale-105 transition-transform">
+                    <div class="w-16 h-16 bg-gradient-to-br from-ghibli-sunset to-orange-400 rounded-2xl flex items-center justify-center mb-6">
+                        <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl sm:text-2xl font-bold text-ghibli-forest mb-4">AI-Smart Workspace</h3>
+                    <p class="text-ghibli-forest/80 leading-relaxed">
+                        Adaptive mood lighting and ergonomic reminders that learn from your patterns 
+                        to create the perfect work environment.
+                    </p>
+                </div>
+                
+                <!-- Collaborative Dashboard -->
+                <div class="ghibli-card rounded-3xl p-6 sm:p-8 ghibli-shadow hover:scale-105 transition-transform">
+                    <div class="w-16 h-16 bg-gradient-to-br from-ghibli-blue to-blue-500 rounded-2xl flex items-center justify-center mb-6">
+                        <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M16 4c0-1.11.89-2 2-2s2 .89 2 2-.89 2-2 2-2-.89-2-2zm4 18v-6h2.5l-2.54-7.63A2.996 2.996 0 0 0 17.06 7c-.8 0-1.54.37-2.01.97L12 11.5 8.95 7.97A2.996 2.996 0 0 0 6.94 7c-.8 0-1.54.37-2.01.97L2.39 15H4.9v7h2.1v-7h2v7h2.1v-7h2v7H16z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl sm:text-2xl font-bold text-ghibli-forest mb-4">Team Collaboration</h3>
+                    <p class="text-ghibli-forest/80 leading-relaxed">
+                        Shared task boards, live presence indicators, and instant chat links 
+                        keep your team connected and productive.
+                    </p>
+                </div>
+                
+                <!-- Intelligent Insights -->
+                <div class="ghibli-card rounded-3xl p-6 sm:p-8 ghibli-shadow hover:scale-105 transition-transform sm:col-span-2 lg:col-span-1">
+                    <div class="w-16 h-16 bg-gradient-to-br from-ghibli-green to-green-500 rounded-2xl flex items-center justify-center mb-6">
+                        <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl sm:text-2xl font-bold text-ghibli-forest mb-4">Smart Insights</h3>
+                    <p class="text-ghibli-forest/80 leading-relaxed">
+                        AI-powered analytics and focus timers help optimize your team's 
+                        productivity and suggest the best meeting times.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-12 sm:py-20 bg-gradient-to-r from-ghibli-green to-ghibli-blue">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4 sm:mb-6">
+                Ready to Transform Your Workspace?
+            </h2>
+            <p class="text-lg sm:text-xl text-white/90 mb-6 sm:mb-8 max-w-2xl mx-auto">
+                Join thousands of teams already using LumiDesk Sync to create 
+                more productive and connected work environments.
+            </p>
+            <a href="dashboard.html" class="inline-block bg-white text-ghibli-forest px-8 py-4 rounded-full text-lg font-semibold hover:bg-ghibli-cream transition-colors ghibli-shadow">
+                Start Your Free Trial
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-ghibli-forest text-white py-6 sm:py-8">
+        <div class="container mx-auto px-4 text-center">
+            <div class="flex items-center justify-center space-x-3 mb-4">
+                <img src="assets/lumidesk-logo.png" alt="LumiDesk Sync Logo" class="w-10 h-10 rounded-full ghibli-shadow border border-ghibli-green/30">
+                <span class="text-lg sm:text-xl font-bold">LumiDesk Sync</span>
+            </div>
+            <p class="text-white/80 text-sm sm:text-base">© 2025 LumiDesk Sync. Crafted with magic for hybrid teams.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle with animation
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const line1 = document.getElementById('line1');
+        const line2 = document.getElementById('line2');
+        const line3 = document.getElementById('line3');
+        
+        let isMenuOpen = false;
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            isMenuOpen = !isMenuOpen;
+            mobileMenu.classList.toggle('hidden');
+            
+            if (isMenuOpen) {
+                line1.style.transform = 'rotate(45deg) translate(5px, 5px)';
+                line2.style.opacity = '0';
+                line3.style.transform = 'rotate(-45deg) translate(7px, -6px)';
+            } else {
+                line1.style.transform = 'rotate(0) translate(0, 0)';
+                line2.style.opacity = '1';
+                line3.style.transform = 'rotate(0) translate(0, 0)';
+            }
+        });
+        
+        // Close mobile menu when clicking on links
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                isMenuOpen = false;
+                mobileMenu.classList.add('hidden');
+                line1.style.transform = 'rotate(0) translate(0, 0)';
+                line2.style.opacity = '1';
+                line3.style.transform = 'rotate(0) translate(0, 0)';
+            });
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
