@@ -63,7 +63,6 @@
         </div>
 
         <div class="grid lg:grid-cols-4 gap-8">
-            <!-- Settings Navigation -->
             <div class="lg:col-span-1">
                 <nav class="ghibli-card rounded-2xl p-4 ghibli-shadow sticky top-24">
                     <ul class="space-y-2">
@@ -76,9 +75,7 @@
                 </nav>
             </div>
 
-            <!-- Settings Content -->
             <div class="lg:col-span-3 space-y-8">
-                <!-- Profile Section -->
                 <section id="profile" class="ghibli-card rounded-2xl p-8 ghibli-shadow">
                     <h2 class="text-2xl font-bold text-ghibli-forest mb-6">Profile Settings</h2>
                     
@@ -154,7 +151,6 @@
                     </div>
                 </section>
 
-                <!-- Workspace Section -->
                 <section id="workspace" class="ghibli-card rounded-2xl p-8 ghibli-shadow">
                     <h2 class="text-2xl font-bold text-ghibli-forest mb-6">Workspace Preferences</h2>
                     
@@ -225,7 +221,6 @@
                     </div>
                 </section>
 
-                <!-- Notifications Section -->
                 <section id="notifications" class="ghibli-card rounded-2xl p-8 ghibli-shadow">
                     <h2 class="text-2xl font-bold text-ghibli-forest mb-6">Notification Settings</h2>
                     
@@ -292,7 +287,6 @@
                     </div>
                 </section>
 
-                <!-- Team Section -->
                 <section id="team" class="ghibli-card rounded-2xl p-8 ghibli-shadow">
                     <h2 class="text-2xl font-bold text-ghibli-forest mb-6">Team Settings</h2>
                     
@@ -371,7 +365,6 @@
                     </div>
                 </section>
 
-                <!-- Integrations Section -->
                 <section id="integrations" class="ghibli-card rounded-2xl p-8 ghibli-shadow">
                     <h2 class="text-2xl font-bold text-ghibli-forest mb-6">Integrations</h2>
                     
@@ -452,7 +445,6 @@
                     </div>
                 </section>
 
-                <!-- Save Button -->
                 <div class="flex justify-end space-x-4">
                     <button class="px-6 py-3 border border-ghibli-green text-ghibli-forest rounded-lg hover:bg-ghibli-green/10 transition-colors">
                         Cancel
@@ -470,17 +462,14 @@
             link.addEventListener('click', function(e) {
                 e.preventDefault();
                 
-                // Remove active class from all nav items
                 document.querySelectorAll('nav a').forEach(navLink => {
                     navLink.classList.remove('bg-ghibli-green/20');
                     navLink.classList.add('hover:bg-ghibli-green/10');
                 });
                 
-                // Add active class to clicked item
                 this.classList.add('bg-ghibli-green/20');
                 this.classList.remove('hover:bg-ghibli-green/10');
                 
-                // Scroll to section
                 const target = document.querySelector(this.getAttribute('href'));
                 if (target) {
                     target.scrollIntoView({
@@ -491,10 +480,8 @@
             });
         });
         
-        // Toggle switches
         document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
             checkbox.addEventListener('change', function() {
-                // Visual feedback for settings changes
                 const setting = this.closest('.flex');
                 if (setting) {
                     setting.style.transform = 'scale(0.98)';
@@ -505,10 +492,8 @@
             });
         });
         
-        // Save settings
         document.querySelector('button:contains("Save Changes")') && 
         document.querySelector('button:contains("Save Changes")').addEventListener('click', function() {
-            // Simulate saving
             this.textContent = 'Saving...';
             this.disabled = true;
             
@@ -524,25 +509,21 @@
         document.getElementById('profile-upload').addEventListener('change', function(e) {
             const file = e.target.files[0];
             if (file) {
-                // Validate file type
                 if (!file.type.startsWith('image/')) {
                     showNotification('Please select an image file.', 'error');
                     return;
                 }
                 
-                // Validate file size (5MB max)
                 if (file.size > 5 * 1024 * 1024) {
                     showNotification('File size must be less than 5MB.', 'error');
                     return;
                 }
                 
-                // Create preview and save
                 const reader = new FileReader();
                 reader.onload = function(e) {
                     const profilePicture = document.getElementById('profile-picture');
                     profilePicture.src = e.target.result;
                     
-                    // Save to localStorage
                     localStorage.setItem('profilePicture', e.target.result);
                     
                     showNotification('Profile picture updated successfully!');
@@ -552,7 +533,6 @@
         });
         
         document.getElementById('remove-picture').addEventListener('click', function() {
-            // Reset to default profile picture
             localStorage.removeItem('profilePicture');
             const defaultPicture = 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80';
             
@@ -562,7 +542,6 @@
         });
         
         function showNotification(message, type = 'success') {
-            // Create notification element
             const notification = document.createElement('div');
             const bgColor = type === 'error' ? 'bg-red-500' : 'bg-ghibli-green';
             notification.className = `fixed top-4 right-4 ${bgColor} text-white px-6 py-3 rounded-lg shadow-lg z-50 transform translate-x-full transition-transform duration-300`;
@@ -570,12 +549,10 @@
             
             document.body.appendChild(notification);
             
-            // Animate in
             setTimeout(() => {
                 notification.classList.remove('translate-x-full');
             }, 100);
             
-            // Animate out and remove
             setTimeout(() => {
                 notification.classList.add('translate-x-full');
                 setTimeout(() => {

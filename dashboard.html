@@ -87,11 +87,9 @@
         </div>
     </header>
 
-    <!-- Sidebar Overlay for Mobile -->
     <div id="sidebar-overlay" class="fixed inset-0 sidebar-overlay z-40 lg:hidden hidden"></div>
 
     <div class="flex min-h-screen relative">
-        <!-- Sidebar -->
         <aside id="sidebar" class="fixed lg:static inset-y-0 left-0 z-50 w-64 bg-white/90 backdrop-blur-sm border-r border-ghibli-green/20 p-4 sm:p-6 transform -translate-x-full lg:translate-x-0 transition-transform duration-300 ease-in-out">
             <nav class="space-y-6">
                 <div>
@@ -137,9 +135,7 @@
             </nav>
         </aside>
 
-        <!-- Main Content -->
         <main class="flex-1 p-4 sm:p-6 lg:ml-0">
-            <!-- Team Presence Bar -->
             <div class="ghibli-card rounded-2xl p-4 mb-4 sm:mb-6 ghibli-shadow">
                 <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                     <h2 class="text-lg font-semibold text-ghibli-forest">Team Status</h2>
@@ -171,9 +167,7 @@
                 </div>
             </div>
 
-            <!-- Stats and Focus Timer -->
             <div class="grid grid-cols-1 lg:grid-cols-4 gap-4 sm:gap-6 mb-4 sm:mb-6">
-                <!-- Focus Timer Widget -->
                 <div class="lg:col-span-1 order-2 lg:order-1">
                     <div class="ghibli-card rounded-2xl p-4 sm:p-6 ghibli-shadow">
                         <h3 class="text-lg font-semibold text-ghibli-forest mb-4">Focus Timer</h3>
@@ -195,7 +189,6 @@
                     </div>
                 </div>
                 
-                <!-- Quick Stats -->
                 <div class="lg:col-span-3 order-1 lg:order-2 grid grid-cols-1 sm:grid-cols-3 gap-4">
                     <div class="ghibli-card rounded-2xl p-4 sm:p-6 ghibli-shadow">
                         <div class="flex items-center justify-between">
@@ -241,7 +234,6 @@
                 </div>
             </div>
 
-            <!-- Kanban Board -->
             <div class="ghibli-card rounded-2xl p-4 sm:p-6 ghibli-shadow">
                 <div class="flex flex-col sm:flex-row sm:items-center justify-between mb-4 sm:mb-6 gap-4">
                     <h2 class="text-xl sm:text-2xl font-bold text-ghibli-forest">Team Tasks</h2>
@@ -251,7 +243,6 @@
                 </div>
                 
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
-                    <!-- To Do Column -->
                     <div class="bg-white/50 rounded-xl p-4">
                         <div class="flex items-center justify-between mb-4">
                             <h3 class="font-semibold text-ghibli-forest">To Do</h3>
@@ -312,7 +303,6 @@
                         </div>
                     </div>
                     
-                    <!-- In Progress Column -->
                     <div class="bg-white/50 rounded-xl p-4">
                         <div class="flex items-center justify-between mb-4">
                             <h3 class="font-semibold text-ghibli-forest">In Progress</h3>
@@ -341,7 +331,6 @@
                         </div>
                     </div>
                     
-                    <!-- Done Column -->
                     <div class="bg-white/50 rounded-xl p-4">
                         <div class="flex items-center justify-between mb-4">
                             <h3 class="font-semibold text-ghibli-forest">Done</h3>
@@ -402,7 +391,6 @@
             });
         });
         
-        // Theme toggle functionality
         const themeToggle = document.getElementById('theme-toggle');
         const body = document.body;
         
@@ -469,11 +457,9 @@
             }
         });
         
-        // Drag and Drop functionality for Kanban board
         let draggedElement = null;
         let draggedFromColumn = null;
         
-        // Add drag event listeners to all task cards
         function addDragListeners() {
             document.querySelectorAll('.task-card').forEach(card => {
                 card.addEventListener('dragstart', handleDragStart);
@@ -486,7 +472,6 @@
             draggedFromColumn = e.target.closest('[data-column]').dataset.column;
             e.target.classList.add('dragging');
             
-            // Add visual feedback
             setTimeout(() => {
                 e.target.style.display = 'none';
             }, 0);
@@ -498,13 +483,11 @@
             draggedElement = null;
             draggedFromColumn = null;
             
-            // Remove drop zone styling from all columns
             document.querySelectorAll('[data-column]').forEach(column => {
                 column.classList.remove('drop-zone');
             });
         }
         
-        // Add drop event listeners to columns
         document.querySelectorAll('[data-column]').forEach(column => {
             column.addEventListener('dragover', handleDragOver);
             column.addEventListener('dragenter', handleDragEnter);
@@ -536,7 +519,6 @@
                 dropColumn.appendChild(draggedElement);
                 updateColumnCounts();
                 
-                // Show success feedback
                 showNotification('Task moved successfully! ✨');
             }
         }
@@ -569,7 +551,6 @@
             }, 3000);
         }
         
-        // Add task functionality
         document.getElementById('add-task-btn').addEventListener('click', () => {
             const taskTitle = prompt('Enter task title:');
             if (taskTitle) {
@@ -607,10 +588,8 @@
             return taskCard;
         }
         
-        // Initialize drag listeners
         addDragListeners();
         
-        // Handle window resize for sidebar
         window.addEventListener('resize', () => {
             if (window.innerWidth >= 1024) {
                 sidebar.classList.remove('sidebar-hidden');
@@ -622,7 +601,6 @@
             }
         });
         
-        // Initialize sidebar state
         if (window.innerWidth < 1024) {
             sidebar.classList.add('sidebar-hidden');
             sidebar.classList.remove('sidebar-visible');
