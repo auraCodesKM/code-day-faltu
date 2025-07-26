@@ -51,14 +51,9 @@
             background: rgba(0, 0, 0, 0.5);
             backdrop-filter: blur(4px);
         }
-        @media (max-width: 1023px) {
-            .sidebar-hidden { transform: translateX(-100%); }
-            .sidebar-visible { transform: translateX(0); }
-        }
     </style>
 </head>
 <body class="bg-gradient-to-br from-ghibli-cream via-green-50 to-ghibli-sky/20 min-h-screen font-ghibli">
-    <!-- Header -->
     <header class="bg-white/80 backdrop-blur-sm border-b border-ghibli-green/20 sticky top-0 z-50">
         <div class="container mx-auto px-4 py-4">
             <div class="flex items-center justify-between">
@@ -97,7 +92,7 @@
 
     <div class="flex min-h-screen relative">
         <!-- Sidebar -->
-        <aside id="sidebar" class="fixed lg:static inset-y-0 left-0 z-50 w-64 bg-white/90 backdrop-blur-sm border-r border-ghibli-green/20 p-4 sm:p-6 transform sidebar-hidden lg:sidebar-visible lg:transform-none transition-transform duration-300 ease-in-out">
+        <aside id="sidebar" class="fixed lg:static inset-y-0 left-0 z-50 w-64 bg-white/90 backdrop-blur-sm border-r border-ghibli-green/20 p-4 sm:p-6 transform -translate-x-full lg:translate-x-0 transition-transform duration-300 ease-in-out">
             <nav class="space-y-6">
                 <div>
                     <h3 class="text-sm font-semibold text-ghibli-forest/60 uppercase tracking-wider mb-3">Workspace</h3>
@@ -375,7 +370,6 @@
         </main>
     </div>
 
-    <!-- Footer -->
     <footer class="bg-ghibli-forest text-white py-6 mt-8">
         <div class="container mx-auto px-4 text-center">
             <div class="flex items-center justify-center space-x-3 mb-4">
@@ -384,26 +378,22 @@
                 </div>
                 <span class="text-lg sm:text-xl font-bold">LumiDesk Sync</span>
             </div>
-            <p class="text-white/80 text-sm sm:text-base">© 2025 LumiDesk Sync. Crafted with magic for hybrid teams.</p>
+            <p class="text-white/80 text-sm sm:text-base">2025 LumiDesk Sync. Crafted with magic for hybrid teams.</p>
         </div>
     </footer>
 
     <script>
-        // Sidebar toggle functionality
         const sidebarToggle = document.getElementById('sidebar-toggle');
         const sidebar = document.getElementById('sidebar');
         const sidebarOverlay = document.getElementById('sidebar-overlay');
         
         function toggleSidebar() {
-            sidebar.classList.toggle('sidebar-hidden');
-            sidebar.classList.toggle('sidebar-visible');
+            sidebar.classList.toggle('-translate-x-full');
             sidebarOverlay.classList.toggle('hidden');
         }
         
         sidebarToggle.addEventListener('click', toggleSidebar);
         sidebarOverlay.addEventListener('click', toggleSidebar);
-        
-        // Close sidebar when clicking on nav links on mobile
         document.querySelectorAll('#sidebar a').forEach(link => {
             link.addEventListener('click', () => {
                 if (window.innerWidth < 1024) {
@@ -427,13 +417,12 @@
             localStorage.setItem('theme', theme);
         });
         
-        // Focus Timer functionality
         let timerInterval;
-        let timeLeft = 25 * 60; // 25 minutes in seconds
+        let timeLeft = 25 * 60;
         let isRunning = false;
         
-        const timerDisplay = document.getElementById('timer-display');
         const focusTimerBtn = document.getElementById('focus-timer-btn');
+        const timerDisplay = document.getElementById('timer-display');
         
         function updateTimerDisplay() {
             const minutes = Math.floor(timeLeft / 60);
@@ -444,8 +433,8 @@
         function startTimer() {
             isRunning = true;
             focusTimerBtn.textContent = 'Pause';
-            focusTimerBtn.classList.add('bg-ghibli-sunset');
             focusTimerBtn.classList.remove('bg-ghibli-green');
+            focusTimerBtn.classList.add('bg-ghibli-sunset');
             
             timerInterval = setInterval(() => {
                 timeLeft--;
@@ -459,7 +448,7 @@
                     focusTimerBtn.classList.add('bg-ghibli-green');
                     timeLeft = 25 * 60;
                     updateTimerDisplay();
-                    alert('Focus session complete! Great job! 🎉');
+                    showNotification('Focus session completed! Great work! ');
                 }
             }, 1000);
         }
